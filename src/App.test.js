@@ -1,8 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders ApexTrack app header and overview', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const titleElement = screen.getByText(/Apex/i);
+  expect(titleElement).toBeInTheDocument();
+  const overviewHeading = screen.getByText(/Weekly Overview/i);
+  expect(overviewHeading).toBeInTheDocument();
 });
