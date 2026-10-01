@@ -1,16 +1,15 @@
 const CACHE_NAME = 'apex-workout-v1';
-const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/favicon.ico',
-  '/logo192.png'
-];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS);
+      const scope = self.registration.scope;
+      return cache.addAll([
+        scope,
+        `${scope}index.html`,
+        `${scope}manifest.json`,
+        `${scope}favicon.ico`
+      ]).catch(() => {});
     })
   );
   self.skipWaiting();
@@ -28,14 +27,12 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Do not intercept non-GET requests or Google Apps Script calls
   if (event.request.method !== 'GET') return;
   if (event.request.url.includes('script.google.com')) return;
 
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) {
-        // Fetch fresh copy in background for next time
         fetch(event.request)
           .then((networkRes) => {
             if (networkRes && networkRes.status === 200) {
@@ -45,7 +42,7 @@ self.addEventListener('fetch', (event) => {
           .catch(() => {});
         return cached;
       }
-      return fetch(event.request).catch(() => caches.match('/index.html'));
+      return fetch(event.request).catch(() => caches.match(self.registration.scope));
     })
   );
 });
