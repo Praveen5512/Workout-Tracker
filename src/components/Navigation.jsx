@@ -18,7 +18,7 @@ export default function Navigation({ activeTab, onTabChange }) {
               key={item.id}
               onClick={() => onTabChange(item.id)}
               className={`nav-item ${isActive ? 'nav-item-active' : ''}`}
-              aria-selected={isActive}
+              aria-current={isActive ? 'page' : undefined}
             >
               <div className="nav-icon-container">
                 <Icon size={20} />
