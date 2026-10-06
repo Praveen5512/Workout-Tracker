@@ -21,7 +21,33 @@ function App() {
     triggerSync
   } = useWorkoutTracker();
 
-  const [activeTab, setActiveTab] = useState('home'); // 'home' | 'analytics' | 'list'
+  const [activeTab, setActiveTab] = useState(() => {
+    try {
+      const activeSession = localStorage.getItem('apextrack_active_flow_session_v1');
+      if (activeSession) {
+        const parsed = JSON.parse(activeSession);
+        if (
+          parsed &&
+          (parsed.sessionStatus === 'running' || parsed.sessionStatus === 'paused')
+        ) {
+          return 'flows';
+        }
+      }
+      return localStorage.getItem('apextrack_active_tab') || 'home';
+    } catch {
+      return 'home';
+    }
+  });
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    try {
+      localStorage.setItem('apextrack_active_tab', tab);
+    } catch {
+      /* ignore */
+    }
+  };
+
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [editingWorkout, setEditingWorkout] = useState(null);
   const [selectedWorkoutDetail, setSelectedWorkoutDetail] = useState(null);
@@ -68,7 +94,7 @@ function App() {
               setIsCreateModalOpen(true);
             }}
             onSelectWorkout={(w) => setSelectedWorkoutDetail(w)}
-            onNavigateToTab={(tab) => setActiveTab(tab)}
+            onNavigateToTab={(tab) => handleTabChange(tab)}
           />
         )}
 
@@ -91,7 +117,7 @@ function App() {
       {/* Bottom Navigation */}
       <Navigation
         activeTab={activeTab}
-        onTabChange={(tab) => setActiveTab(tab)}
+        onTabChange={handleTabChange}
       />
 
       {/* Create / Edit Workout Modal */}
