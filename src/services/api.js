@@ -3,6 +3,7 @@
  * Handles communication with Google Sheets backend
  * Conforms to requirements in README.md:
  * - GET ?action=readAll
+ * - GET ?action=common_workouts
  * - GET ?action=readOne&id={rowId}
  * - POST { "action": "create", "data": { ... } }
  * - POST { "action": "update", "id": {rowId}, "data": { ... } }
@@ -107,6 +108,26 @@ export const api = {
     const records = Array.isArray(json) ? json : (json.records || json.data || []);
     return records.map(normalizeRecord);
   },
+  async syncCommonWorkouts() {
+    const scriptUrl = getScriptUrl();
+    if (!scriptUrl) return null; // local demo mode
+
+    const separator = scriptUrl.includes('?') ? '&' : '?';
+    const response = await fetchWithTimeout(`${scriptUrl}${separator}action=common_workouts`, {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch records: ${response.statusText}`);
+    }
+
+    const json = await response.json();
+
+    return json.data;
+
+  }
+  ,
 
   /**
    * Fetch one workout record by row ID
@@ -238,5 +259,8 @@ export const api = {
 
     const resJson = await response.json();
     return resJson;
-  }
+  },
+
+
+
 };

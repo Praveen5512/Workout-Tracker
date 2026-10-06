@@ -1,20 +1,6 @@
 import { useState, useEffect } from 'react';
 import { X, Plus, Minus, Check, Dumbbell, Calendar, Layers, RotateCcw, Clock, FileText } from 'lucide-react';
-
-const COMMON_EXERCISES = [
-  'Barbell Bench Press',
-  'Barbell Squat',
-  'Barbell Deadlift',
-  'Overhead Press',
-  'Pull-ups',
-  'Romanian Deadlift',
-  'Incline Dumbbell Press',
-  'Barbell Bent Over Row',
-  'Dumbbell Lateral Raise',
-  'Barbell Bicep Curl',
-  'Tricep Rope Pushdown',
-  'Leg Press'
-];
+import { api } from '../services/api';
 
 const getTodayString = () => new Date().toISOString().split('T')[0];
 
@@ -28,24 +14,44 @@ export default function WorkoutModal({ isOpen, onClose, onSave, initialData }) {
   const [weight, setWeight] = useState('');
   const [duration, setDuration] = useState(30);
   const [notes, setNotes] = useState('');
+  const [commonExercises, setCommonExercises] = useState([]);
+
+  // Fetch common workout names from backend when modal opens
+  useEffect(() => {
+    if (!isOpen) return;
+    let cancelled = false;
+
+    api.syncCommonWorkouts()
+      .then((records) => {
+        if (cancelled || !records) return;
+        // Extract unique exercise names from the returned records
+
+        setCommonExercises(records);
+      })
+      .catch((err) => {
+        console.warn('Could not fetch common workouts:', err);
+      });
+
+    return () => { cancelled = true; };
+  }, [isOpen]);
 
   // Populate data when editing
   useEffect(() => {
     if (initialData) {
       setDate(initialData.Date || getTodayString());
       setExercise(initialData.Exercise || '');
-      setSets(Number(initialData.Sets) || 3);
-      setReps(Number(initialData.Reps) || 8);
+      setSets(Number(initialData.Sets) || 0);
+      setReps(Number(initialData.Reps) || 0);
       setWeight(initialData['Weight/Intensity'] || '');
-      setDuration(Number(initialData['Duration (min)']) || 30);
+      setDuration(Number(initialData['Duration (min)']) || 0);
       setNotes(initialData.Notes || '');
     } else {
       setDate(getTodayString());
       setExercise('');
-      setSets(3);
-      setReps(8);
+      setSets(0);
+      setReps(0);
       setWeight('');
-      setDuration(30);
+      setDuration(0);
       setNotes('');
     }
   }, [initialData, isOpen]);
@@ -138,7 +144,8 @@ export default function WorkoutModal({ isOpen, onClose, onSave, initialData }) {
 
             {/* Quick chips for fast mobile selection */}
             <div className="exercise-chips-scroll">
-              {COMMON_EXERCISES.slice(0, 8).map((name, i) => (
+
+              {commonExercises.slice(0, 8).map((name, i) => (
                 <button
                   type="button"
                   key={i}
@@ -152,7 +159,7 @@ export default function WorkoutModal({ isOpen, onClose, onSave, initialData }) {
           </div>
 
           {/* 3 & 4. Sets & Reps Steppers */}
-          <div className="form-grid-2">
+          <div className="" >
             {/* Sets Stepper */}
             <div className="form-group">
               <label className="input-label">
@@ -184,7 +191,7 @@ export default function WorkoutModal({ isOpen, onClose, onSave, initialData }) {
             </div>
 
             {/* Reps Stepper */}
-            <div className="form-group">
+            <div className="form-group d-block">
               <label className="input-label">
                 <RotateCcw size={14} className="inline mr-1 text-accent-amber" /> Reps
               </label>
