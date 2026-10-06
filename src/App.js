@@ -7,6 +7,7 @@ import ListDataScreen from './components/ListDataScreen';
 import WorkoutModal from './components/WorkoutModal';
 import WorkoutDetailModal from './components/WorkoutDetailModal';
 import SettingsModal from './components/SettingsModal';
+import FlowsScreen from './components/FlowsScreen';
 import { useWorkoutTracker } from './hooks/useWorkoutTracker';
 import './App.css';
 
@@ -17,8 +18,7 @@ function App() {
     addWorkout,
     updateWorkout,
     deleteWorkout,
-    triggerSync,
-    resetSampleData
+    triggerSync
   } = useWorkoutTracker();
 
   const [activeTab, setActiveTab] = useState('home'); // 'home' | 'analytics' | 'list'
@@ -76,6 +76,8 @@ function App() {
           <AnalyticsScreen workouts={workouts} />
         )}
 
+        {activeTab === 'flows' && <FlowsScreen />}
+
         {activeTab === 'list' && (
           <ListDataScreen
             workouts={workouts}
@@ -124,7 +126,7 @@ function App() {
         onClose={() => setIsSettingsModalOpen(false)}
         syncState={syncState}
         onTriggerSync={triggerSync}
-        onResetData={resetSampleData}
+
       />
     </div>
   );

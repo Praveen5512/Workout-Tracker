@@ -45,10 +45,7 @@ export function useWorkoutTracker() {
     return syncEngine.triggerSync();
   }, []);
 
-  const resetSampleData = useCallback(() => {
-    const fresh = storage.resetToSampleData();
-    setWorkouts(fresh);
-  }, []);
+
 
   return {
     workouts,
@@ -56,7 +53,6 @@ export function useWorkoutTracker() {
     addWorkout,
     updateWorkout,
     deleteWorkout,
-    triggerSync,
-    resetSampleData
+    triggerSync
   };
 }

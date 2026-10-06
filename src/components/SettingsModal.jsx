@@ -7,12 +7,13 @@ import {
   AlertCircle, 
   RefreshCw, 
   Trash2, 
-  RotateCcw, 
+  
   Copy, 
   CheckCheck, 
   ChevronDown, 
   ChevronUp,
-  FileSpreadsheet
+  FileSpreadsheet,
+
 } from 'lucide-react';
 import { api, getScriptUrl, setScriptUrl } from '../services/api';
 import { storage } from '../services/storage';
@@ -21,8 +22,7 @@ export default function SettingsModal({
   isOpen, 
   onClose, 
   syncState, 
-  onTriggerSync, 
-  onResetData 
+  onTriggerSync
 }) {
   const [url, setUrl] = useState(() => getScriptUrl());
   const [testStatus, setTestStatus] = useState(null); // { type: 'success'|'error'|'loading', message: '' }
@@ -279,27 +279,7 @@ function doPost(e) {
             </div>
           </div>
 
-          {/* 3. Demo / Reset Data */}
-          <div className="settings-section mb-4">
-            <h4 className="settings-section-title flex-align-center">
-              <FileSpreadsheet size={15} className="mr-1 text-accent-cyan" />
-              Demo Data & Storage
-            </h4>
-            <p className="text-xs text-muted mb-2">
-              Reset local storage to realistic fitness logs spanning current and past weeks.
-            </p>
-            <button 
-              className="btn-secondary w-full"
-              onClick={() => {
-                if (window.confirm('Reset local workout tracker to sample workout records?')) {
-                  onResetData();
-                  alert('Reset to sample workout data completed.');
-                }
-              }}
-            >
-              <RotateCcw size={14} className="mr-1" /> Reset to Sample Workout Data
-            </button>
-          </div>
+
 
           {/* 4. Google Sheets Apps Script Setup Guide */}
           <div className="settings-section">
