@@ -94,23 +94,35 @@ export default function WorkoutModal({ isOpen, onClose, onSave, initialData }) {
   };
 
   return (
-    <div className="modal-backdrop" onClick={onClose}>
+    <div 
+      className="modal-backdrop" 
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="workout-modal-title"
+      id="modal-workout-entry"
+    >
       <div className="modal-sheet glass-panel animate-slide-up" onClick={(e) => e.stopPropagation()}>
         {/* Modal Header */}
-        <div className="modal-header">
+        <header className="modal-header">
           <div className="flex-align-center">
-            <div className="modal-icon-badge">
+            <div className="modal-icon-badge" aria-hidden="true">
               <Dumbbell size={18} className="text-accent-primary" />
             </div>
             <div>
-              <h3 className="modal-title">{isEditing ? 'Edit Workout Log' : 'Record Workout'}</h3>
+              <h2 id="workout-modal-title" className="modal-title">{isEditing ? 'Edit Workout Log' : 'Record Workout'}</h2>
               <p className="modal-subtitle">Conforms with Google Sheets Schema</p>
             </div>
           </div>
-          <button className="modal-close-btn" onClick={onClose} aria-label="Close modal">
+          <button 
+            id="btn-close-workout-modal"
+            className="modal-close-btn" 
+            onClick={onClose} 
+            aria-label="Close modal"
+          >
             <X size={20} />
           </button>
-        </div>
+        </header>
 
         {/* Modal Form */}
         <form onSubmit={handleSubmit} className="modal-form">

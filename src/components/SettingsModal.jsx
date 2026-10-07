@@ -159,23 +159,35 @@ function doPost(e) {
   };
 
   return (
-    <div className="modal-backdrop" onClick={onClose}>
+    <div 
+      className="modal-backdrop" 
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="settings-modal-title"
+      id="modal-settings-dialog"
+    >
       <div className="modal-sheet glass-panel animate-slide-up" onClick={(e) => e.stopPropagation()}>
         {/* Header */}
-        <div className="modal-header">
+        <header className="modal-header">
           <div className="flex-align-center">
-            <div className="modal-icon-badge">
+            <div className="modal-icon-badge" aria-hidden="true">
               <Settings size={18} className="text-accent-primary" />
             </div>
             <div>
-              <h3 className="modal-title">Settings & Backend</h3>
+              <h2 id="settings-modal-title" className="modal-title">Settings & Backend</h2>
               <p className="modal-subtitle">Google Sheets Apps Script API Configuration</p>
             </div>
           </div>
-          <button className="modal-close-btn" onClick={onClose} aria-label="Close settings">
+          <button 
+            id="btn-close-settings-modal"
+            className="modal-close-btn" 
+            onClick={onClose} 
+            aria-label="Close settings"
+          >
             <X size={20} />
           </button>
-        </div>
+        </header>
 
         {/* Modal Body */}
         <div className="modal-body p-4 scrollable-body">

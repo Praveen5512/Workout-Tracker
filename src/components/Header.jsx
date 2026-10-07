@@ -58,7 +58,7 @@ export default function Header({ syncState, onTriggerSync, onOpenSettings }) {
           <Dumbbell size={20} className="brand-icon" />
         </div>
         <div className="brand-text">
-          <h1 className="brand-title">Apex<span className="brand-highlight">Track</span></h1>
+          <div className="brand-title" role="banner" aria-label="ApexTrack Workout Tracker">Apex<span className="brand-highlight">Track</span></div>
           <div className="connection-pill">
             <span className={isOnline ? 'pulse-dot-online' : 'pulse-dot-offline'}></span>
             <span className="connection-label">{isOnline ? 'Online' : 'Offline Mode'}</span>
@@ -71,6 +71,7 @@ export default function Header({ syncState, onTriggerSync, onOpenSettings }) {
 
         {isOnline && (
           <button 
+            id="btn-header-manual-sync"
             className="header-icon-btn hover-glow" 
             onClick={onTriggerSync} 
             disabled={isSyncing}
@@ -82,6 +83,7 @@ export default function Header({ syncState, onTriggerSync, onOpenSettings }) {
         )}
 
         <button 
+          id="btn-header-open-settings"
           className="header-icon-btn" 
           onClick={onOpenSettings}
           title="App Settings & Backend"

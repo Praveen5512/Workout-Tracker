@@ -1,6 +1,65 @@
 {
-  "short_name": "ApexWorkout",
-  "name": "Apex Workout Tracker PWA",
+  "short_name": "ApexTrack",
+  "name": "ApexTrack – Workout Tracker PWA",
+  "description": "High-performance offline-first workout tracker PWA with Google Sheets synchronization, interval flows, and 1RM analytics.",
+  "id": "https://praveen5512.github.io/Workout-Tracker/",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0b0f19",
+  "background_color": "#0b0f19",
+  "categories": ["fitness", "health", "sports", "lifestyle"],
+  "shortcuts": [
+    {
+      "name": "Log Workout",
+      "short_name": "Log",
+      "description": "Record a new workout log",
+      "url": "./?action=create",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Workout Flows",
+      "short_name": "Flows",
+      "description": "Launch guided workout routines and interval timer",
+      "url": "./?tab=flows",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Analytics & PRs",
+      "short_name": "Analytics",
+      "description": "View volume trends and 1RM progression",
+      "url": "./?tab=analytics",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Workout History",
+      "short_name": "History",
+      "description": "Browse and search past workout logs",
+      "url": "./?tab=list",
+      "icons": [
+        {
+          "src": "logo192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
   "icons": [
     {
       "src": "favicon.ico",
@@ -19,11 +78,5 @@
       "sizes": "512x512",
       "purpose": "any maskable"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "orientation": "portrait",
-  "theme_color": "#0b0f19",
-  "background_color": "#0b0f19",
-  "categories": ["fitness", "health", "sports"]
+  ]
 }

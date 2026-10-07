@@ -97,23 +97,25 @@ export default function AnalyticsScreen({ workouts }) {
   const maxVolumeInTrend = Math.max(...weeklyVolumeTrend.map(w => w.volume), 100);
 
   return (
-    <div className="screen-container analytics-screen">
-      <div className="section-header-row mb-3">
+    <section className="screen-container analytics-screen" id="analytics-screen-view" aria-labelledby="analytics-overview-heading">
+      <header className="section-header-row mb-3">
         <div>
           <span className="subtle-badge">
-            <BarChart3 size={12} className="text-accent-primary" /> Performance Analytics
+            <BarChart3 size={12} className="text-accent-primary" aria-hidden="true" /> Performance Analytics
           </span>
-          <h2 className="section-title">Analytics & Dashboard</h2>
+          <h1 className="section-title" id="analytics-overview-heading">Analytics & Dashboard</h1>
           <p className="section-subtitle">Deep dive into consistency, volume, and exercise progression</p>
         </div>
-      </div>
+      </header>
 
       {/* 1. Streaks & Consistency (Section 9.1) */}
-      <div className="analytics-card glass-panel mb-4">
+      <section className="analytics-card glass-panel mb-4" aria-labelledby="heading-consistency-streaks">
         <div className="card-header-row mb-3">
           <div className="performance-card-title">
-            <Flame size={18} className="text-accent-amber" />
-            <span>Consistency & Streaks</span>
+            <Flame size={18} className="text-accent-amber" aria-hidden="true" />
+            <h2 id="heading-consistency-streaks" style={{ fontSize: 'inherit', fontWeight: 'inherit', margin: 0, display: 'inline' }}>
+              Consistency & Streaks
+            </h2>
           </div>
           <span className="pill-badge pill-amber">Consistency Tracking</span>
         </div>
@@ -157,14 +159,16 @@ export default function AnalyticsScreen({ workouts }) {
             />
           </div>
         </div>
-      </div>
+      </section>
 
       {/* 2. Progress Metrics: Weekly Volume SVG Bar Chart (Section 9.2) */}
-      <div className="analytics-card glass-panel mb-4">
+      <section className="analytics-card glass-panel mb-4" aria-labelledby="heading-volume-progression">
         <div className="card-header-row mb-2">
           <div className="performance-card-title">
-            <TrendingUp size={18} className="text-accent-primary" />
-            <span>Volume Progression (Last 6 Weeks)</span>
+            <TrendingUp size={18} className="text-accent-primary" aria-hidden="true" />
+            <h2 id="heading-volume-progression" style={{ fontSize: 'inherit', fontWeight: 'inherit', margin: 0, display: 'inline' }}>
+              Volume Progression (Last 6 Weeks)
+            </h2>
           </div>
         </div>
         <p className="text-xs text-muted mb-3">Total load calculated from Sets × Reps × Weight</p>
@@ -243,20 +247,24 @@ export default function AnalyticsScreen({ workouts }) {
             })}
           </svg>
         </div>
-      </div>
+      </section>
 
       {/* 3. Exercise-Specific Progression & PRs (Section 9.2 & 9.3) */}
-      <div className="analytics-card glass-panel mb-4">
+      <section className="analytics-card glass-panel mb-4" aria-labelledby="heading-exercise-progression">
         <div className="card-header-row mb-3">
           <div className="performance-card-title">
-            <Award size={18} className="text-accent-cyan" />
-            <span>Exercise Progression</span>
+            <Award size={18} className="text-accent-cyan" aria-hidden="true" />
+            <h2 id="heading-exercise-progression" style={{ fontSize: 'inherit', fontWeight: 'inherit', margin: 0, display: 'inline' }}>
+              Exercise Progression
+            </h2>
           </div>
           {/* Dropdown to pick exercise */}
           <select 
+            id="select-analytics-exercise"
             value={selectedExercise}
             onChange={(e) => setSelectedExercise(e.target.value)}
             className="exercise-select-dropdown"
+            aria-label="Filter progress by exercise"
           >
             {allExercises.map((ex, i) => (
               <option key={i} value={ex}>{ex}</option>
@@ -355,20 +363,22 @@ export default function AnalyticsScreen({ workouts }) {
             Log more sessions for <strong className="text-main">{selectedExercise}</strong> to view the progression curve.
           </div>
         )}
-      </div>
+      </section>
 
       {/* 4. Workout Intensity & Summary Insights (Section 9.4) */}
-      <div className="analytics-card glass-panel">
+      <section className="analytics-card glass-panel" aria-labelledby="heading-health-insights">
         <div className="card-header-row mb-3">
           <div className="performance-card-title">
-            <Activity size={18} className="text-accent-primary" />
-            <span>Workout Health Insights</span>
+            <Activity size={18} className="text-accent-primary" aria-hidden="true" />
+            <h2 id="heading-health-insights" style={{ fontSize: 'inherit', fontWeight: 'inherit', margin: 0, display: 'inline' }}>
+              Workout Health Insights
+            </h2>
           </div>
         </div>
 
         <div className="insights-list">
           <div className="insight-item">
-            <div className="insight-bullet bullet-green" />
+            <div className="insight-bullet bullet-green" aria-hidden="true" />
             <div>
               <p className="insight-text font-medium">Progressive Overload Tracking</p>
               <p className="insight-desc">
@@ -378,7 +388,7 @@ export default function AnalyticsScreen({ workouts }) {
           </div>
 
           <div className="insight-item">
-            <div className="insight-bullet bullet-cyan" />
+            <div className="insight-bullet bullet-cyan" aria-hidden="true" />
             <div>
               <p className="insight-text font-medium">Recovery & Frequency</p>
               <p className="insight-desc">
@@ -387,7 +397,7 @@ export default function AnalyticsScreen({ workouts }) {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </section>
   );
 }
