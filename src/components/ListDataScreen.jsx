@@ -176,17 +176,17 @@ export default function ListDataScreen({
   };
 
   return (
-    <div className="screen-container list-screen">
+    <section className="screen-container list-screen" id="list-data-screen-view" aria-labelledby="history-overview-heading">
       {/* Screen Title & Month Navigation (10.1 & 10.3) */}
-      <div className="list-top-bar mb-3">
+      <header className="list-top-bar mb-3">
         <div>
-          <h2 className="section-title">Workout History</h2>
+          <h1 className="section-title" id="history-overview-heading">Workout History</h1>
           <p className="section-subtitle">Browsing records with field filters & date controls</p>
         </div>
-      </div>
+      </header>
 
       {/* Date Presets Row */}
-      <div className="presets-scroll-row mb-3">
+      <div className="presets-scroll-row mb-3" role="group" aria-label="Date filter range presets">
         <button
           className={`filter-preset-pill ${dateFilterPreset === 'current_month' ? 'preset-active' : ''}`}
           onClick={() => handlePresetChange('current_month')}
@@ -219,7 +219,7 @@ export default function ListDataScreen({
           </button>
           
           <div className="month-nav-label">
-            <Calendar size={16} className="text-accent-primary mr-1" />
+            <Calendar size={16} className="text-accent-primary mr-1" aria-hidden="true" />
             <span>{monthDisplayName}</span>
           </div>
 
@@ -236,25 +236,29 @@ export default function ListDataScreen({
       {/* Search Bar & Filter Toggle Button (10.2) */}
       <div className="search-filter-row mb-3">
         <div className="search-input-wrapper glass-panel">
-          <Search size={16} className="text-muted mr-2" />
+          <Search size={16} className="text-muted mr-2" aria-hidden="true" />
           <input
+            id="input-search-workouts"
             type="text"
             placeholder="Search exercise or notes..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"
+            aria-label="Search workouts by exercise name or notes"
           />
           {searchQuery && (
-            <button onClick={() => setSearchQuery('')} className="clear-search-btn">
+            <button onClick={() => setSearchQuery('')} className="clear-search-btn" aria-label="Clear search query">
               <X size={15} />
             </button>
           )}
         </div>
 
         <button 
+          id="btn-toggle-filters"
           className={`filter-drawer-btn glass-panel ${hasActiveFilters ? 'active-filter' : ''}`}
           onClick={() => setShowFilterDrawer(!showFilterDrawer)}
           title="Filter by fields"
+          aria-label="Toggle workout filter panel"
         >
           <SlidersHorizontal size={17} />
           {hasActiveFilters && <span className="filter-active-dot" />}
@@ -381,12 +385,13 @@ export default function ListDataScreen({
 
               <div className="group-items-stack">
                 {items.map(w => (
-                  <div 
+                  <article 
                     key={w.id} 
                     className="workout-record-card glass-panel hover-card"
                     onClick={() => onSelectWorkout(w)}
                     role="button"
                     tabIndex={0}
+                    aria-label={`${w.Exercise} on ${w.Date}, ${w.Sets} sets of ${w.Reps} reps`}
                   >
                     <div className="record-top-row">
                       <span className="record-exercise-name">{w.Exercise}</span>
@@ -397,7 +402,7 @@ export default function ListDataScreen({
                           </span>
                         ) : (
                           <span className="sync-chip sync-chip-synced" title="Synced with Sheets">
-                            <CheckCircle2 size={11} /> Synced
+                            <CheckCircle2 size={11} aria-hidden="true" /> Synced
                           </span>
                         )}
                       </div>
@@ -414,7 +419,7 @@ export default function ListDataScreen({
                       )}
                       {w['Duration (min)'] > 0 && (
                         <div className="metric-pill metric-pill-time">
-                          <Clock3 size={11} className="inline mr-1" />
+                          <Clock3 size={11} className="inline mr-1" aria-hidden="true" />
                           {w['Duration (min)']} min
                         </div>
                       )}
@@ -432,26 +437,26 @@ export default function ListDataScreen({
                         className="record-action-btn action-edit"
                         onClick={() => onEditWorkout(w)}
                         title="Edit record"
-                        aria-label="Edit"
+                        aria-label={`Edit ${w.Exercise} record`}
                       >
-                        <Edit3 size={14} className="mr-1" /> Edit
+                        <Edit3 size={14} className="mr-1" aria-hidden="true" /> Edit
                       </button>
                       <button 
                         className="record-action-btn action-delete"
                         onClick={() => onDeleteWorkout(w.id)}
                         title="Delete record"
-                        aria-label="Delete"
+                        aria-label={`Delete ${w.Exercise} record`}
                       >
-                        <Trash2 size={14} className="mr-1" /> Delete
+                        <Trash2 size={14} className="mr-1" aria-hidden="true" /> Delete
                       </button>
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
             </div>
           ))}
         </div>
       )}
-    </div>
+    </section>
   );
 }

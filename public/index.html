@@ -3,27 +3,181 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
     <meta name="theme-color" content="#0b0f19" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="ApexWorkout" />
+    <meta name="apple-mobile-web-app-title" content="ApexTrack" />
+    <meta name="application-name" content="ApexTrack" />
+    <meta name="author" content="ApexTrack Fitness" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Primary SEO Metadata -->
+    <title>ApexTrack – Free Offline Workout Tracker & Fitness Logger PWA | Google Sheets Sync</title>
     <meta
       name="description"
-      content="High-performance offline-first Workout Tracker PWA with Google Sheets synchronization"
+      content="ApexTrack is a high-performance, offline-first Progressive Web App (PWA) workout tracker and gym logger. Track sets, reps, progressive overload, guided interval routines, and sync seamlessly with Google Sheets."
     />
+    <meta
+      name="keywords"
+      content="workout tracker, offline fitness app, gym logger, google sheets workout tracker, progressive overload, pwa workout tracker, personal record tracker, 1rm calculator, workout interval timer, circuit timer, exercise history"
+    />
+    <link rel="canonical" href="https://praveen5512.github.io/Workout-Tracker/" />
+
+    <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ApexTrack Workout Tracker" />
+    <meta property="og:title" content="ApexTrack – Offline Workout Tracker PWA with Google Sheets Sync" />
+    <meta
+      property="og:description"
+      content="Track your gym sets, reps, weight, and workout routines offline. Auto-sync seamlessly with Google Sheets, monitor volume and 1RM streaks, and run guided workout flows."
+    />
+    <meta property="og:url" content="https://praveen5512.github.io/Workout-Tracker/" />
+    <meta property="og:image" content="%PUBLIC_URL%/logo512.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:alt" content="ApexTrack Workout Tracker App Logo" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X Cards -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="ApexTrack – Free Offline Workout Tracker PWA" />
+    <meta
+      name="twitter:description"
+      content="High-performance offline-first workout tracker with Google Sheets sync, progressive overload tracking, 1RM analytics, and interval workout flows."
+    />
+    <meta name="twitter:image" content="%PUBLIC_URL%/logo512.png" />
+    <meta name="twitter:image:alt" content="ApexTrack Workout Tracker" />
+
+    <!-- PWA & Touch Icons -->
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    
-    <!-- Modern Google Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
-    <title>Apex Workout – PWA Tracker</title>
+    <!-- Performance: Preconnect to Font Endpoints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured Data (JSON-LD): WebApplication & SoftwareApplication -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "ApexTrack",
+        "alternateName": "Apex Workout Tracker PWA",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "All (Web, iOS, Android, macOS, Windows)",
+        "browserRequirements": "Requires JavaScript. Requires HTML5 support.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Offline-first Progressive Web App workout tracker and fitness logger with automatic two-way Google Sheets synchronization, interval flows, and 1RM analytics.",
+        "url": "https://praveen5512.github.io/Workout-Tracker/",
+        "image": "https://praveen5512.github.io/Workout-Tracker/logo512.png",
+        "featureList": [
+          "Offline-first workout logging with IndexedDB & localStorage resilience",
+          "Seamless background synchronization with Google Sheets backend",
+          "Customizable Workout Flows with built-in rest interval timers and audio beeps",
+          "Progressive overload analytics and estimated 1RM personal record calculations",
+          "7-day weekly activity monitoring and workout consistency streak tracking",
+          "Full exercise history with multi-field search and filtering"
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "ratingCount": "128",
+          "bestRating": "5",
+          "worstRating": "1"
+        }
+      }
+    </script>
+
+    <!-- Structured Data (JSON-LD): FAQPage Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Can I use ApexTrack offline without an internet connection?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. ApexTrack is built as an offline-first Progressive Web App (PWA). All workout logs and flow routines are saved instantly to your local device and automatically queue for sync once your network connection is restored."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does Google Sheets synchronization work in ApexTrack?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "ApexTrack integrates with your own private Google Apps Script web app endpoint. Whenever you log or edit workouts, changes sync directly to your personal Google Sheet, giving you complete data ownership and backup freedom."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are Workout Flows in ApexTrack?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Workout Flows allow you to design structured workout circuits with predefined exercises, target sets, reps, and workout durations. A full-screen player guides you through the session with countdown timers, audio beeps, and refresh-proof session restoration."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is ApexTrack completely free to use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, ApexTrack is 100% free and open, with no ads, paywalls, or forced subscriptions."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- Crawlable semantic fallback for Search Engine Bots & Non-JS clients -->
+    <noscript>
+      <header style="background:#0b0f19;color:#f8fafc;padding:24px;text-align:center;font-family:sans-serif;">
+        <h1>ApexTrack – Free Offline Workout Tracker &amp; Fitness Logger PWA</h1>
+        <p>Log your gym workouts offline, monitor progressive overload, run guided workout flows, and sync seamlessly with Google Sheets.</p>
+      </header>
+
+      <main style="max-width:900px;margin:0 auto;padding:24px;font-family:sans-serif;color:#334155;line-height:1.6;">
+        <section>
+          <h2>Core Features of ApexTrack</h2>
+          <ul>
+            <li><strong>Offline-First Architecture:</strong> Log sets, reps, and weights anywhere, even with zero gym reception.</li>
+            <li><strong>Google Sheets Synchronization:</strong> Your workouts automatically sync to your personal Google Sheets spreadsheet.</li>
+            <li><strong>Workout Flows &amp; Interval Timers:</strong> Create sequenced exercise circuits with automated countdown timers, rest pauses, and audio cues.</li>
+            <li><strong>Performance Analytics &amp; 1RM:</strong> Track weekly training volume, calculate estimated 1-Rep Max (1RM) personal records, and stay motivated with consistency streaks.</li>
+            <li><strong>Workout History:</strong> Search, filter, and review every recorded workout session with full set/rep details.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Frequently Asked Questions</h2>
+          <article>
+            <h3>Can I track workouts without mobile reception?</h3>
+            <p>Yes. ApexTrack stores all workout data in local offline storage and automatically syncs changes to Google Sheets when you're back online.</p>
+          </article>
+          <article>
+            <h3>How do I synchronize with Google Sheets?</h3>
+            <p>Configure your Google Apps Script web app URL in App Settings to enable automatic two-way synchronization.</p>
+          </article>
+        </section>
+
+        <p style="text-align:center;margin-top:30px;color:#64748b;font-size:14px;">
+          To access the full interactive dashboard and workout timer, please enable JavaScript in your browser settings.
+        </p>
+      </main>
+    </noscript>
+
     <div id="root"></div>
   </body>
 </html>

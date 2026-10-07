@@ -476,15 +476,15 @@ export default function FlowsScreen() {
 
   // Main Flows Hub / Dashboard UI
   return (
-    <section className="flows-screen flow-hub">
+    <section className="flows-screen flow-hub" id="flows-screen-view" aria-labelledby="flows-heading">
       {/* Hero Header */}
-      <div className="flow-hub-header">
+      <header className="flow-hub-header">
         <div className="flow-hub-titles">
           <div className="flow-eyebrow-pill">
             <span className="pulse-dot-online" />
             <span>WORKOUT SEQUENCING</span>
           </div>
-          <h1 className="section-title">Flows</h1>
+          <h1 id="flows-heading" className="section-title">Flows</h1>
           <p className="section-subtitle">
             Craft guided routines, train with seamless timers, and build steady momentum.
           </p>
@@ -498,7 +498,7 @@ export default function FlowsScreen() {
           <Plus size={18} />
           <span>Create flow</span>
         </button>
-      </div>
+      </header>
 
       {/* Active Session in Progress Banner */}
       {activeSession &&

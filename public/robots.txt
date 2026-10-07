@@ -1,3 +1,7 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+
+# Sitemap Index
+Sitemap: https://praveen5512.github.io/Workout-Tracker/sitemap.xml
+Host: https://praveen5512.github.io

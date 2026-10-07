@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
 import HomeScreen from './components/HomeScreen';
@@ -9,6 +9,7 @@ import WorkoutDetailModal from './components/WorkoutDetailModal';
 import SettingsModal from './components/SettingsModal';
 import FlowsScreen from './components/FlowsScreen';
 import { useWorkoutTracker } from './hooks/useWorkoutTracker';
+import { updateSEO, SEO_PRESETS } from './utils/seo';
 import './App.css';
 
 function App() {
@@ -52,6 +53,19 @@ function App() {
   const [editingWorkout, setEditingWorkout] = useState(null);
   const [selectedWorkoutDetail, setSelectedWorkoutDetail] = useState(null);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+
+  // Synchronize document title and SEO meta tags with active view/modal
+  useEffect(() => {
+    if (selectedWorkoutDetail) {
+      updateSEO({
+        title: `${selectedWorkoutDetail.Exercise} – Workout Log | ApexTrack`,
+        description: `Review workout details for ${selectedWorkoutDetail.Exercise} recorded on ${selectedWorkoutDetail.Date}: ${selectedWorkoutDetail.Sets} sets, ${selectedWorkoutDetail.Reps} reps, load: ${selectedWorkoutDetail['Weight/Intensity'] || 'bodyweight'}.`
+      });
+    } else {
+      const preset = SEO_PRESETS[activeTab] || SEO_PRESETS.home;
+      updateSEO(preset);
+    }
+  }, [activeTab, selectedWorkoutDetail]);
 
   // Handle saving (Create or Update)
   const handleSaveWorkout = (workoutData, existingId) => {
